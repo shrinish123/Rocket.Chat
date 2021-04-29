@@ -203,6 +203,7 @@ API.v1.addRoute('rooms.cleanHistory', { authRequired: true }, {
 			excludePinned: [true, 'true', 1, '1'].includes(this.bodyParams.excludePinned),
 			filesOnly: [true, 'true', 1, '1'].includes(this.bodyParams.filesOnly),
 			ignoreThreads: [true, 'true', 1, '1'].includes(this.bodyParams.ignoreThreads),
+			ignoreDiscussion: [true, 'true', 1, '1'].includes(this.bodyParams.ignoreDiscussion),
 			fromUsers: this.bodyParams.users,
 		}));
 
@@ -408,7 +409,7 @@ API.v1.addRoute('rooms.export', { authRequired: true }, {
 			}
 
 			if (dateFrom > dateTo) {
-				throw new Meteor.Error('From date cannot be after To date');
+				throw new Meteor.Error('error-invalid-dates', 'From date cannot be after To date');
 			}
 
 			sendFile({
